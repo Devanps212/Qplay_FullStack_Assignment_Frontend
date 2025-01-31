@@ -1,7 +1,6 @@
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { VideoForm } from '../types/videoForm'
-import configData from '../config/configData'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
@@ -55,7 +54,7 @@ export const useVideoForm = (onClose: () => void) => {
           setWaitMessage(`Just a little longer, your video is almost ready!`)
         }, 10000)
 
-        const response: AxiosResponse = await axios(configData.upload, {
+        const response: AxiosResponse = await axios("romantic-heart-production.up.railway.app/upload" , {
           method: "POST",
           data: formData
         })

@@ -2,7 +2,6 @@ import React, { createContext, useCallback, useState } from "react";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { Video } from "../types/interface";
 import { toast } from "react-toastify";
-import configData from "../config/configData";
 
 const VideoContext = createContext<{
   videos: Video[];
@@ -17,10 +16,7 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchVideos = useCallback(async() => {
     try {
-      console.log(configData.getVideos)
-      const response: AxiosResponse = await axios(configData.getVideos, {
-        method:"GET"
-      })
+      const response: AxiosResponse = await axios.get("romantic-heart-production.up.railway.app/getVideos")
       console.log(response.data.video)
       setVideos(response.data.video)
     } catch (error: unknown) {
