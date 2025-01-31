@@ -72,7 +72,7 @@ const MediaPlayer = ({ videoData, isFirstVideo }: { videoData: Video; isFirstVid
       setCurrentQuality(quality)
       hls.current.startLevel = qualityLevels.indexOf(quality)
 
-      hls.current.on(Hls.Events.LEVEL_SWITCHED, (event, data) => {
+      hls.current.on(Hls.Events.LEVEL_SWITCHED, (_, data) => {
         const quality = qualityLevels[data.level] || "Unknown"
         setCurrentQuality(quality)
 
