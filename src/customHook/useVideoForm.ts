@@ -23,8 +23,6 @@ const validationSchema = Yup.object({
 export const useVideoForm = (onClose: () => void) => {
 
   const [waitMessage, setWaitMessage] = useState("")
-  
-  const patienceQuote = "Patience is bitter, but its fruit is sweet. :– Aristotle"
 
   const formik = useFormik({
     initialValues,
@@ -37,22 +35,6 @@ export const useVideoForm = (onClose: () => void) => {
 
       try {
         setWaitMessage("Please wait, it will take a few minutes...")
-
-        setTimeout(() => {
-          setWaitMessage(`Uploading your video...`)
-        }, 5000)
-
-        setTimeout(() => {
-          setWaitMessage(`Almost there, uploading in progress...`)
-        }, 10000)
-
-        setTimeout(() => {
-          setWaitMessage(patienceQuote)
-        }, 20000)
-
-        setTimeout(() => {
-          setWaitMessage(`Just a little longer, your video is almost ready!`)
-        }, 10000)
 
         const response: AxiosResponse = await axios("https://romantic-heart-production.up.railway.app/upload" , {
           method: "POST",
@@ -73,6 +55,7 @@ export const useVideoForm = (onClose: () => void) => {
         } else {
           toast.error("Unexpected error. Please try again.")
         }
+        console.log(error)
       }
     }
   })
