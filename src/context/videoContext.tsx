@@ -16,7 +16,7 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchVideos = useCallback(async() => {
     try {
-      const response: AxiosResponse = await axios.get("romantic-heart-production.up.railway.app/getVideos")
+      const response: AxiosResponse = await axios.get("https://romantic-heart-production.up.railway.app/getVideos")
       console.log(response.data.video)
       setVideos(response.data.video)
     } catch (error: unknown) {

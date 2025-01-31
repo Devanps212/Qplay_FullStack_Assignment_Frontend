@@ -54,7 +54,7 @@ export const useVideoForm = (onClose: () => void) => {
           setWaitMessage(`Just a little longer, your video is almost ready!`)
         }, 10000)
 
-        const response: AxiosResponse = await axios("romantic-heart-production.up.railway.app/upload" , {
+        const response: AxiosResponse = await axios("https://romantic-heart-production.up.railway.app/upload" , {
           method: "POST",
           data: formData
         })
