@@ -17,6 +17,7 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchVideos = useCallback(async() => {
     try {
+      console.log(configData.getVideos)
       const response: AxiosResponse = await axios.get(configData.getVideos)
       console.log(response.data.video)
       setVideos(response.data.video)
