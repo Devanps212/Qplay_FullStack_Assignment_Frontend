@@ -23,31 +23,47 @@ const validationSchema = Yup.object({
 
 export const useVideoForm = (onClose: () => void) => {
 
-  const [ waitMessage, setWaitMessage ] = useState("")
+  const [waitMessage, setWaitMessage] = useState("")
+  
+  const patienceQuote = "Patience is bitter, but its fruit is sweet. :– Aristotle"
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async(values)=>{
-      
+    onSubmit: async (values) => {
+
       const formData = new FormData()
       formData.append("title", values.title)
       formData.append("file", values.video as File)
-      
+
       try {
         setWaitMessage("Please wait, it will take a few minutes...")
 
-        setTimeout(() => setWaitMessage("Uploading your video..."), 5000)
-        setTimeout(() => setWaitMessage("Almost there, uploading in progress..."), 9000)
+        setTimeout(() => {
+          setWaitMessage(`Uploading your video...`)
+        }, 5000)
+
+        setTimeout(() => {
+          setWaitMessage(`Almost there, uploading in progress...`)
+        }, 10000)
+
+        setTimeout(() => {
+          setWaitMessage(patienceQuote)
+        }, 20000)
+
+        setTimeout(() => {
+          setWaitMessage(`Just a little longer, your video is almost ready!`)
+        }, 10000)
+
         const response: AxiosResponse = await axios(configData.upload, {
-          method:"POST",
+          method: "POST",
           data: formData
         })
-  
+
         toast.success(response.data.message)
         formik.resetForm()
         onClose()
-      } catch(error: unknown) {
+      } catch (error: unknown) {
         if (error instanceof AxiosError) {
           console.log(error.message)
           if (error.response) {

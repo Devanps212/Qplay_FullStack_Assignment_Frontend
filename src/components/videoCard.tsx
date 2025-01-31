@@ -17,8 +17,7 @@ const VideoCard = ({ video, onClick }: { video: Video; onClick: () => void }) =>
                 className="absolute inset-0 flex items-center justify-center text-5xl text-white opacity-90 
                 transform transition-all duration-300 ease-out hover:text-red-400 hover:opacity-100 hover:scale-110
                 active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-400"
-                onClick={onClick}
-                >
+                onClick={onClick}>
                 <FaPlayCircle className="animate-pulse" />
             </button>
         </div>

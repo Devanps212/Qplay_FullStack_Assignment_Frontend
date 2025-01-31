@@ -28,5 +28,5 @@ const Sidebar = ({ openModal }: { openModal: () => void }) => {
     )
 }
   
-export default Sidebar;
+export default Sidebar
   

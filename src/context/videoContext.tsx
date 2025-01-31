@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useCallback, useState } from "react";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { Video } from "../types/interface";
 import { toast } from "react-toastify";
@@ -15,7 +15,7 @@ const VideoContext = createContext<{
 export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
   const [videos, setVideos] = useState<Video[]>([])
 
-  const fetchVideos = async (id?: string) => {
+  const fetchVideos = useCallback(async (id?: string) => {
     try {
       const url = id ? `${configData.getVideos}/${id}` : configData.getVideos
       const response: AxiosResponse = await axios.get(url)
@@ -23,16 +23,16 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
       setVideos(response.data.video)
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
-          if (error.response) {
-              toast.error(error.response.data || "Error fetching video")
-          } else {
-              toast.error("Network error. Please check your connection.")
-          }
+        if (error.response) {
+          toast.error(error.response.data || "Error fetching video")
+        } else {
+          toast.error("Network error. Please check your connection.")
+        }
       } else {
-          toast.error("Unexpected error. Please try again.")
+        toast.error("Unexpected error. Please try again.")
       }
     }
-  }
+  }, [])
 
   return (
     <VideoContext.Provider value={{ videos, fetchVideos }}>
