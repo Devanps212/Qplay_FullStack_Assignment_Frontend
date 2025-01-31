@@ -15,10 +15,9 @@ const VideoContext = createContext<{
 export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
   const [videos, setVideos] = useState<Video[]>([])
 
-  const fetchVideos = useCallback(async (id?: string) => {
+  const fetchVideos = useCallback(async() => {
     try {
-      const url = id ? `${configData.getVideos}/${id}` : configData.getVideos
-      const response: AxiosResponse = await axios.get(url)
+      const response: AxiosResponse = await axios.get(configData.getVideos)
       console.log(response.data.video)
       setVideos(response.data.video)
     } catch (error: unknown) {
